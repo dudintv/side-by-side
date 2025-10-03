@@ -18,7 +18,7 @@ const variant = computed(() => framework.value.variants?.[0] || null);
       </span>
       <span
         v-if="variant"
-        class="text-base max-lg:text-sm font-medium leading-none shrink-0 opacity-50"
+        class="text-base max-lg:text-sm font-medium leading-none shrink-0 opacity-60"
       >
         {{ variant }}
       </span>

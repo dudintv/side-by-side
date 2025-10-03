@@ -8,7 +8,7 @@ const { currentFrameworks, isTypescript } = useSettings();
       <div class="flex items-center">
         <NuxtLink
           to="/"
-          class="text-lg max-md:text-base shrink-0 uppercase font-bold mr-8 leading-3 text-primary flex gap-1 max-md:flex-col"
+          class="text-lg max-md:text-base shrink-0 uppercase font-bold mr-6 md:mr-10 lg:mr-16 leading-3 text-primary flex gap-1 max-md:flex-col"
         >
           <span>Side</span>
           <span>by</span>

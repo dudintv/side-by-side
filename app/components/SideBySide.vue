@@ -8,7 +8,7 @@ const { currentFrameworks, frameworks } = useSettings();
   >
     <template v-for="i in currentFrameworks.length" :key="i">
       <div v-if="currentFrameworks[i - 1] && $slots[currentFrameworks[i - 1]!]">
-        <div class="flex gap-2 opacity-50 text-xs mb-2">
+        <div class="flex gap-2 opacity-75 text-xs mb-2">
           <FrameworkLogo
             :name="currentFrameworks[i - 1]!"
             :size="16"

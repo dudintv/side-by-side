@@ -6,5 +6,9 @@ export default defineContentConfig({
       type: 'page',
       source: '**/*.md',
     }),
+    topics: defineCollection({
+      type: 'page',
+      source: 'topics/*.md',
+    }),
   },
 });
