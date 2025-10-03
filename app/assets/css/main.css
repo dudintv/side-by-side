@@ -1,0 +1,20 @@
+@import 'tailwindcss';
+@import '@nuxt/ui';
+
+@theme {
+  --ui-primary: var(--color-sky-950);
+}
+
+.dark {
+  --ui-primary: var(--color-sky-200);
+}
+
+h1 {
+  @apply font-bold text-4xl mb-8;
+}
+h2 {
+  @apply font-semibold text-3xl mb-4;
+}
+h3 {
+  @apply font-semibold text-2xl mb-2;
+}
