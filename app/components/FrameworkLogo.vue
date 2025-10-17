@@ -3,22 +3,15 @@ import type { FrameworkName } from '~/types';
 
 const props = defineProps<{ name: FrameworkName; size?: number }>();
 const colorMode = useColorMode();
-
-const universalSrc = computed(() => `/logos/${props.name}.logo.svg`);
-const coloredSrc = computed(
-  () => `/logos/${props.name}.logo.${colorMode.value}.svg`
+const normalizedColorMode = computed(() =>
+  colorMode.value === 'system' ? 'dark' : colorMode.value
 );
-const src = ref('');
+const src = computed(
+  () => `/logos/${props.name}.logo.${normalizedColorMode.value}.svg`
+);
 const alt = computed(() => `Logo of ${props.name}`);
-
-onMounted(() => {
-  src.value = coloredSrc.value;
-});
-function onError() {
-  src.value = universalSrc.value;
-}
 </script>
 
 <template>
-  <img :src :alt :width="size || 30" @error="onError" />
+  <img :src :alt :width="size || 30" />
 </template>

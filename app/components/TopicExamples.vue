@@ -3,28 +3,21 @@ import type { ExamplesCollectionItem } from '@nuxt/content';
 
 const props = defineProps<{
   examples: Record<string, Record<string, ExamplesCollectionItem>>;
+  topic: string;
 }>();
 
 const { currentFrameworks, frameworks } = useSettings();
 
-const items = computed(() =>
-  Object.keys(props.examples).map((key) => ({
-    label: key,
-  }))
-);
-const activeItem = ref();
-const values = computed(() => [
-  props.examples?.simple?.['react.19.functional']?.body || null,
-  props.examples?.simple?.['vue.3_5.composition']?.body || null,
-]);
+const values = computed(() => {
+  return [
+    props.examples?.[props.topic]?.['react.19.functional']?.body || null,
+    props.examples?.[props.topic]?.['vue.3_5.composition']?.body || null,
+  ];
+});
 </script>
 
 <template>
   <div class="mb-12">
-    <div class="flex gap-4 md:gap-6 lg:gap-8 py-2">
-      <h3>Examples</h3>
-      <UTabs v-model="activeItem" :items variant="link" />
-    </div>
     <div class="flex gap-4 md:gap-8 ml:gap-12 w-full">
       <template v-for="i in currentFrameworks.length" :key="i">
         <div v-if="currentFrameworks[i - 1]">
