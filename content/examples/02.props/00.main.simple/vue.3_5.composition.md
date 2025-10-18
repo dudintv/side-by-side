@@ -19,6 +19,8 @@ const props = defineProps({
 </template>
 ```
 
-```
+#### Using
+
+```html
 <MyComponent name="world" />
 ```

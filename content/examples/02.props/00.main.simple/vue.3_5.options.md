@@ -20,6 +20,8 @@ export default {
 </script>
 ```
 
-```
+#### Using
+
+```html
 <MyComponent name="world" />
 ```

@@ -19,6 +19,8 @@ MyReactComponent.defaultProps = {
 };
 ```
 
-```
-<MyReactComponent name="world">
+#### Using
+
+```html
+<MyReactComponent name="world" />
 ```

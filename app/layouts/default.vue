@@ -22,7 +22,10 @@ const groups = computed<CommandPaletteGroup<CommandPaletteItem>[]>(() => [
 <template>
   <UContainer class="py-8 flex gap-4 md:gap-8 lg:gap-12 scroll-auto">
     <div class="hidden md:block">
-      <UCommandPalette :groups="groups" class="shrink-0 sticky top-32" />
+      <div class="shrink-0 sticky top-32">
+        <UCommandPalette :groups="groups" class="" />
+        <div id="toc-teleport" />
+      </div>
     </div>
 
     <div class="md:hidden">

@@ -1,12 +1,25 @@
 @import 'tailwindcss';
 @import '@nuxt/ui';
 
+body {
+  background-color: var(--ui-bg);
+}
+
 @theme {
   --ui-primary: var(--color-sky-950);
 }
 
 .dark {
   --ui-primary: var(--color-sky-200);
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  @apply scroll-mt-32;
 }
 
 h1 {
@@ -17,6 +30,9 @@ h2 {
 }
 h3 {
   @apply font-semibold text-2xl mb-2;
+}
+h4 {
+  @apply font-semibold text-xl mt-8 mb-2 opacity-90 dark:opacity-70;
 }
 
 p {

@@ -99,5 +99,9 @@ onBeforeRouteUpdate((to, from) => {
 <template>
   <div class="w-full">
     <ContentRenderer v-if="page" :value="page" :data="examplesData" />
+
+    <Teleport to="#toc-teleport">
+      <TopicTOC v-if="page" :page="page" />
+    </Teleport>
   </div>
 </template>
