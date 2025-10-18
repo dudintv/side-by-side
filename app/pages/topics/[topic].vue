@@ -1,15 +1,14 @@
 <script setup lang="ts">
 import type { ExamplesCollectionItem } from '@nuxt/content';
-import { onBeforeRouteUpdate } from 'vue-router';
 
 type ExampleDocs = Record<string, Record<string, ExamplesCollectionItem>>;
 
 const route = useRoute();
 
-const { data: page } = await useAsyncData(() =>
+const { data: page } = await useAsyncData(`topic-${route.params.topic}`, () =>
   queryCollection('topics').path(`/topics/${route.params.topic}`).first()
 );
-const { data: examples } = await useAsyncData(() => {
+const { data: examples } = await useAsyncData(`examples-${route.params.topic}`, () => {
   console.log('route.params.topic =', route.params.topic);
   return queryCollection('examples')
     .where('path', 'LIKE', `/examples/${route.params.topic}/%`)
@@ -83,17 +82,6 @@ definePageMeta({
   },
 });
 
-const currentPath = computed(() => route.fullPath);
-watch(currentPath, () => {
-  console.log('Route changed:', currentPath.value);
-  reloadNuxtApp();
-});
-
-onBeforeRouteUpdate((to, from) => {
-  if (to.params.topic !== from.params.topic) {
-    console.log('Route param topic changed:', to.params.topic);
-  }
-});
 </script>
 
 <template>
