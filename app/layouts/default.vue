@@ -1,29 +1,33 @@
 <script setup lang="ts">
-import type { CommandPaletteGroup, CommandPaletteItem } from '@nuxt/ui';
+import type { TocLink } from '@nuxt/content';
+import type { NavigationMenuItem } from '@nuxt/ui';
 
 const { data: pages } = await useAsyncData('topics', () =>
   queryCollection('topics').all()
 );
 
-const topics = computed<CommandPaletteItem[]>(() =>
-  pages.value!.map((p) => ({
-    label: p.meta.menu as string,
-    to: p.path,
-  }))
-);
-const groups = computed<CommandPaletteGroup<CommandPaletteItem>[]>(() => [
-  {
-    id: 'topics',
-    items: topics.value,
-  },
-]);
+const navigationItems = computed<NavigationMenuItem[]>(() => {
+  if (!pages.value) return [];
+
+  console.log('pages.value =', pages.value);
+
+  return pages.value.map((page) => ({
+    label: page.meta.menu as string,
+    to: page.path,
+    children:
+      page.body?.toc?.links?.map((link: TocLink) => ({
+        label: link.text,
+        to: `${page.path}#${link.id}`,
+      })) || [],
+  }));
+});
 </script>
 
 <template>
   <UContainer class="py-8 flex gap-4 md:gap-8 lg:gap-12 scroll-auto">
     <div class="hidden md:block">
       <div class="shrink-0 sticky top-32">
-        <UCommandPalette :groups="groups" class="" />
+        <UNavigationMenu :items="navigationItems" orientation="vertical" />
         <div id="toc-teleport" />
       </div>
     </div>
@@ -36,7 +40,7 @@ const groups = computed<CommandPaletteGroup<CommandPaletteItem>[]>(() => [
         <UButton icon="i-lucide-menu" color="neutral" variant="subtle" />
 
         <template #content>
-          <UCommandPalette :groups="groups" />
+          <UNavigationMenu :items="navigationItems" orientation="vertical" />
         </template>
       </UPopover>
     </div>
