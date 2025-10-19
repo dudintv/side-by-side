@@ -9,8 +9,6 @@ const { data: pages } = await useAsyncData('topics', () =>
 const navigationItems = computed<NavigationMenuItem[]>(() => {
   if (!pages.value) return [];
 
-  console.log('pages.value =', pages.value);
-
   return pages.value.map((page) => ({
     label: page.meta.menu as string,
     to: page.path,

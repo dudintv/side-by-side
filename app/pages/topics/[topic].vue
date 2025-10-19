@@ -8,12 +8,14 @@ const route = useRoute();
 const { data: page } = await useAsyncData(`topic-${route.params.topic}`, () =>
   queryCollection('topics').path(`/topics/${route.params.topic}`).first()
 );
-const { data: examples } = await useAsyncData(`examples-${route.params.topic}`, () => {
-  console.log('route.params.topic =', route.params.topic);
-  return queryCollection('examples')
-    .where('path', 'LIKE', `/examples/${route.params.topic}/%`)
-    .all();
-});
+const { data: examples } = await useAsyncData(
+  `examples-${route.params.topic}`,
+  () => {
+    return queryCollection('examples')
+      .where('path', 'LIKE', `/examples/${route.params.topic}/%`)
+      .all();
+  }
+);
 
 // const experiment = computed(() => {
 //   if (!examples.value) {
@@ -49,10 +51,6 @@ const examplesData = computed<{
       return structuredExamples;
     }, {} as ExampleDocs);
 
-  console.log(
-    '+++ doc.paths =',
-    examples.value.map((doc) => doc.path)
-  );
   const otherExamples = examples.value
     .filter((doc) => !doc.path.match(/main/))
     .reduce((structuredExamples, doc) => {
@@ -77,11 +75,9 @@ useSeoMeta({
 
 definePageMeta({
   key: (route) => {
-    console.log('definePageMeta: fullPath =', route.fullPath);
     return route.fullPath;
   },
 });
-
 </script>
 
 <template>
