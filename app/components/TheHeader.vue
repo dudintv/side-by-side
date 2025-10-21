@@ -1,5 +1,5 @@
 <script setup lang="ts">
-const { currentFrameworks, isTypescript } = useSettings();
+const { currentFrameworks, hasLineNumbers } = useSettings();
 </script>
 
 <template>
@@ -26,10 +26,10 @@ const { currentFrameworks, isTypescript } = useSettings();
         class="flex items-center gap-2 lg:gap-4 max-sm:flex-col max-sm:gap-0 max-sm:items-end"
       >
         <USwitch
-          v-model="isTypescript"
-          label="TS"
+          v-model="hasLineNumbers"
+          label="#"
           size="xl"
-          unchecked-icon="i-lucide-x"
+          unchecked-icon=""
           checked-icon="i-lucide-check"
         />
         <UColorModeButton size="xl" />

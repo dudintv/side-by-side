@@ -1,7 +1,7 @@
 import type { FrameworkName, Frameworks } from '~/types';
 
-export default function () {
-  const isTypescript = useState('isTypescript', () => true);
+export default function useSettings() {
+  const hasLineNumbers = useState('hasLineNumbers', () => true);
   const frameworks = useState<Frameworks>('frameworks', () => {
     return {
       vue: {
@@ -22,5 +22,5 @@ export default function () {
     () => ['react', 'vue']
   );
 
-  return { isTypescript, frameworks, currentFrameworks };
+  return { hasLineNumbers, frameworks, currentFrameworks };
 }
