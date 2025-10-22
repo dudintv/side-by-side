@@ -18,7 +18,7 @@ const values = computed(() => {
 
 <template>
   <div class="mb-12">
-    <div class="flex gap-4 md:gap-8 ml:gap-12 w-full">
+    <div class="example-root flex gap-4 md:gap-8 ml:gap-12 w-full">
       <template v-for="i in currentFrameworks.length" :key="i">
         <div v-if="currentFrameworks[i - 1]">
           <div class="flex gap-2 opacity-75 text-xs mb-2">
