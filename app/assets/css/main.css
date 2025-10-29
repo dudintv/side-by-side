@@ -39,13 +39,18 @@ p {
   @apply leading-7;
 }
 
-.highlighted-word {
-  @apply bg-amber-300/10! rounded hover:bg-amber-300/30! transition-all;
-  @apply inline-block;
-}
+/* SHIKI CODE HIGHLIGHTING */
 
-.highlighted {
-  @apply bg-amber-200/10!;
+.shiki {
+  @apply px-6 py-4 rounded-2xl;
+}
+html.dark .shiki {
+  color: var(--shiki-dark) !important;
+  background-color: var(--shiki-dark-bg) !important;
+  /* Optional, if you also want font styles */
+  font-style: var(--shiki-dark-font-style) !important;
+  font-weight: var(--shiki-dark-font-weight) !important;
+  text-decoration: var(--shiki-dark-text-decoration) !important;
 }
 
 @keyframes shake {
@@ -60,25 +65,45 @@ p {
     transform: translateY(2px);
   }
 }
-
 .animate {
-  @apply bg-amber-300/20;
+  @apply bg-amber-300/50! dark:bg-amber-700/50!;
   animation: 0.3s ease-in-out shake;
 }
 
-code .highlighted {
-  @apply -mx-6 px-6;
+pre code {
+  .highlighted {
+    @apply bg-amber-300/15;
+  }
+
+  .highlighted-word {
+    @apply bg-amber-300/10 rounded hover:bg-amber-300/30 transition-all;
+    @apply inline-block;
+  }
+
+  .line {
+    @apply block min-h-4 hover:bg-amber-500/10  -mx-6 px-6;
+  }
 }
 
-.shiki {
-  @apply px-6 py-4 rounded-2xl;
+html.dark {
+  pre code {
+    .highlighted {
+      @apply bg-amber-300/5;
+    }
+  }
 }
 
-html.dark .shiki {
-  color: var(--shiki-dark) !important;
-  background-color: var(--shiki-dark-bg) !important;
-  /* Optional, if you also want font styles */
-  font-style: var(--shiki-dark-font-style) !important;
-  font-weight: var(--shiki-dark-font-weight) !important;
-  text-decoration: var(--shiki-dark-text-decoration) !important;
+.numbered-lines {
+  pre code {
+    counter-reset: count 0;
+
+    .line {
+      counter-increment: count 1;
+    }
+
+    .line::before {
+      @apply inline-block w-6 text-right -ml-2 mr-4 text-primary/30 text-sm;
+      content: counter(count, decimal);
+    }
+  }
 }

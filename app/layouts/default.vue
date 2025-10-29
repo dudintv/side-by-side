@@ -2,9 +2,9 @@
 import type { TocLink } from '@nuxt/content';
 import type { NavigationMenuItem } from '@nuxt/ui';
 
-const { data: pages } = await useAsyncData('topics', () =>
-  queryCollection('topics').all()
-);
+const { hasLineNumbers } = useSettings();
+
+const { data: pages } = await useAsyncData('topics', () => queryCollection('topics').all());
 
 const navigationItems = computed<NavigationMenuItem[]>(() => {
   if (!pages.value) return [];
@@ -22,7 +22,10 @@ const navigationItems = computed<NavigationMenuItem[]>(() => {
 </script>
 
 <template>
-  <UContainer class="py-8 flex gap-4 md:gap-8 lg:gap-12 scroll-auto">
+  <div
+    class="px-0 sm:px-2 md:px-4 lg:px-6 xl:px-8 py-8 flex gap-4 md:gap-8 lg:gap-12 scroll-auto"
+    :class="{ 'numbered-lines': hasLineNumbers }"
+  >
     <div class="hidden md:block">
       <div class="shrink-0 sticky top-32">
         <UNavigationMenu :items="navigationItems" orientation="vertical" />
@@ -31,10 +34,7 @@ const navigationItems = computed<NavigationMenuItem[]>(() => {
     </div>
 
     <div class="md:hidden">
-      <UPopover
-        :content="{ side: 'right', align: 'start' }"
-        class="sticky top-32"
-      >
+      <UPopover :content="{ side: 'right', align: 'start' }" class="sticky top-32">
         <UButton icon="i-lucide-menu" color="neutral" variant="subtle" />
 
         <template #content>
@@ -44,5 +44,5 @@ const navigationItems = computed<NavigationMenuItem[]>(() => {
     </div>
 
     <slot />
-  </UContainer>
+  </div>
 </template>

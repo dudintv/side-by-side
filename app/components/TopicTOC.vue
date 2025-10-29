@@ -96,7 +96,7 @@ onMounted(() => {
         class="block w-full text-left text-sm transition-all duration-200 px-4 cursor-pointer"
         :class="
           activeId === item.id
-            ? 'font-medium bg-elevated py-2 rounded-3xl opacity-100'
+            ? 'font-medium bg-elevated py-2 opacity-100 border-r-1'
             : 'pr-4 opacity-80 hover:opacity-100'
         "
       >

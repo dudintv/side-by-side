@@ -5,46 +5,29 @@ const props = defineProps<{
   examples: Record<string, Record<string, ExamplesCollectionItem>>;
 }>();
 
-const { currentFrameworks, frameworks } = useSettings();
-
+const examplesNames = computed(() => Object.keys(props.examples));
 const items = computed(() =>
-  Object.keys(props.examples).map((key) => ({
+  examplesNames.value.map((key) => ({
     label: key,
   }))
 );
-const activeItem = ref();
-const values = computed(() => [
-  props.examples?.simple?.['react.19.functional']?.body || null,
-  props.examples?.simple?.['vue.3_5.composition']?.body || null,
-]);
+const activeItem = ref(examplesNames.value[0]);
+const values = computed(() =>
+  activeItem.value
+    ? [
+        props.examples?.[activeItem.value]?.['react.19.functional']?.body || null,
+        props.examples?.[activeItem.value]?.['vue.3_5.composition']?.body || null,
+      ]
+    : []
+);
 </script>
 
 <template>
   <div class="mb-12">
-    <div class="flex gap-4 md:gap-6 lg:gap-8 py-2">
+    <div class="flex gap-4 md:gap-6 lg:gap-8 pt-8 pb-4">
       <h3>Examples</h3>
       <UTabs v-model="activeItem" :items variant="link" />
     </div>
-    <div class="flex gap-4 md:gap-8 ml:gap-12 w-full">
-      <template v-for="i in currentFrameworks.length" :key="i">
-        <div v-if="currentFrameworks[i - 1]">
-          <div class="flex gap-2 opacity-75 text-xs mb-2">
-            <FrameworkLogo
-              :name="currentFrameworks[i - 1]!"
-              :size="16"
-              class="grayscale-50"
-            />
-            {{ frameworks[currentFrameworks[i - 1]!].name }}
-            {{ frameworks[currentFrameworks[i - 1]!].versions[0] }},
-            {{ frameworks[currentFrameworks[i - 1]!].variants?.[0] }}
-          </div>
-          <ContentRenderer
-            v-if="values[i - 1]"
-            :value="values[i - 1]!"
-            class="grow"
-          />
-        </div>
-      </template>
-    </div>
+    <ComparingExamples :values />
   </div>
 </template>

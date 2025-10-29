@@ -99,23 +99,12 @@ onMounted(() => {
 
 <template>
   <div ref="codeContainer">
-    <pre class="text-primary/50">{{ attrsWithoutCode }}</pre>
+    <!-- <pre class="text-primary/50">{{ attrsWithoutCode }}</pre>
     <pre
       :class="attrs.class as string"
       class="py-8 text-sm text-primary/30"
       :style="attrs.style as string"
-    ><slot /></pre>
+    ><slot /></pre> -->
     <div v-html="htmlCode" />
   </div>
 </template>
-
-<style lang="postcss">
-pre code {
-  @apply px-8 py-4;
-}
-
-pre code .line {
-  display: block;
-  min-height: 1.2em;
-}
-</style>

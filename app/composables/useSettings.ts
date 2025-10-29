@@ -21,6 +21,14 @@ export default function useSettings() {
     'currentFrameworks',
     () => ['react', 'vue']
   );
+  const currentFrameworksAmount = computed(
+    () => currentFrameworks.value.length
+  );
 
-  return { hasLineNumbers, frameworks, currentFrameworks };
+  return {
+    hasLineNumbers,
+    frameworks,
+    currentFrameworks,
+    currentFrameworksAmount,
+  };
 }
