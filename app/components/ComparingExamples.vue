@@ -13,7 +13,7 @@ const { currentFrameworks, currentFrameworksAmount, frameworks } = useSettings()
     >
       <template v-for="(frameworkName, i) in currentFrameworks" :key="frameworkName">
         <div v-if="frameworks[frameworkName]">
-          <div class="flex gap-2 opacity-75 text-xs mb-2">
+          <div class="flex gap-2 opacity-75 text-xs mb-2 pl-6">
             <FrameworkLogo :name="frameworkName" :size="16" class="grayscale-50" />
             {{ frameworks[frameworkName].name }}
             {{ frameworks[frameworkName].versions[0] }},

@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import type { TocLink } from '@nuxt/content';
+// import type { TocLink } from '@nuxt/content';
 import type { NavigationMenuItem } from '@nuxt/ui';
 
 const { hasLineNumbers } = useSettings();
@@ -12,11 +12,11 @@ const navigationItems = computed<NavigationMenuItem[]>(() => {
   return pages.value.map((page) => ({
     label: page.meta.menu as string,
     to: page.path,
-    children:
-      page.body?.toc?.links?.map((link: TocLink) => ({
-        label: link.text,
-        to: `${page.path}#${link.id}`,
-      })) || [],
+    // children:
+    //   page.body?.toc?.links?.map((link: TocLink) => ({
+    //     label: link.text,
+    //     to: `${page.path}#${link.id}`,
+    //   })) || [],
   }));
 });
 </script>
