@@ -15,18 +15,18 @@ defineOptions({
 });
 
 const attrs = useAttrs();
-const attrsWithoutCode = computed(() => {
-  const withoutCode = { ...attrs };
-  void (withoutCode.code && delete withoutCode.code);
-  return withoutCode;
-});
+// const attrsWithoutCode = computed(() => {
+//   const withoutCode = { ...attrs };
+//   void (withoutCode.code && delete withoutCode.code);
+//   return withoutCode;
+// });
 const highlighter = await createHighlighter({
   themes: ['vitesse-dark', 'vitesse-light'],
   langs: ['javascript', 'typescript', 'jsx', 'vue'],
 });
 
 const htmlCode = computed(() =>
-  highlighter.codeToHtml(attrs.code as string, {
+  highlighter.codeToHtml((attrs.code as string).trim(), {
     lang: attrs.language as string,
     themes: {
       light: 'vitesse-light',
@@ -53,10 +53,7 @@ onMounted(() => {
 
   const handleMouseEnter = (event: MouseEvent) => {
     const target = event.target as HTMLElement;
-    if (
-      target.tagName === 'SPAN' &&
-      target.classList.contains('highlighted-word')
-    ) {
+    if (target.tagName === 'SPAN' && target.classList.contains('highlighted-word')) {
       const text = target.textContent?.trim();
       if (text) {
         exampleRoot?.querySelectorAll('.highlighted-word')?.forEach((word) => {
@@ -75,10 +72,7 @@ onMounted(() => {
 
   const handleMouseLeave = (event: MouseEvent) => {
     const target = event.target as HTMLElement;
-    if (
-      target.tagName === 'SPAN' &&
-      target.classList.contains('highlighted-word')
-    ) {
+    if (target.tagName === 'SPAN' && target.classList.contains('highlighted-word')) {
       exampleRoot?.querySelectorAll('.highlighted-word')?.forEach((word) => {
         const htmlWord = word as HTMLElement;
         htmlWord.classList.remove('animate');
