@@ -51,7 +51,7 @@ onMounted(() => {
   const exampleRoot = codeContainer.value.closest('.example-root') as Element;
   if (!exampleRoot) return;
 
-  const handleMouseEnter = (event: MouseEvent) => {
+  const handleMouseEnter: EventListener = (event) => {
     const target = event.target as HTMLElement;
     if (target.tagName === 'SPAN' && target.classList.contains('highlighted-word')) {
       const text = target.textContent?.trim();
@@ -61,7 +61,7 @@ onMounted(() => {
             const htmlWord = word as HTMLElement;
 
             htmlWord.classList.remove('animate');
-            // Animate hovered element immediately, and the rest with delay
+            // Animate hovered element immediately, and the rest elements with delay
             htmlWord.style.animationDelay = word === target ? '0s' : '0.1s';
             htmlWord.classList.add('animate');
           }
@@ -70,7 +70,7 @@ onMounted(() => {
     }
   };
 
-  const handleMouseLeave = (event: MouseEvent) => {
+  const handleMouseLeave: EventListener = (event) => {
     const target = event.target as HTMLElement;
     if (target.tagName === 'SPAN' && target.classList.contains('highlighted-word')) {
       exampleRoot?.querySelectorAll('.highlighted-word')?.forEach((word) => {
