@@ -1,3 +1,7 @@
+`ref()` uses a `.value` property to change the value of the state. `ref()` is deep reactivity by default.
+
+Vue automatically unwraps refs — so, you can use `{{ count }}` instead of `{{ count.value }}` in `<template>`
+
 ```vue /count/
 <script setup lang="ts">
 const count = ref(0);

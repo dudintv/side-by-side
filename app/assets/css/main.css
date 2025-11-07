@@ -89,20 +89,24 @@ code {
   @apply bg-elevated p-1 rounded;
 }
 
-pre code {
-  @apply p-0;
+pre {
+  @apply my-4;
 
-  .highlighted {
-    @apply bg-gradient-to-r from-amber-300/10 to-amber-300/5;
-  }
+  code {
+    @apply p-0;
 
-  .highlighted-word {
-    @apply bg-amber-300/10 rounded hover:bg-amber-300/30 transition-all;
-    @apply inline-block;
-  }
+    .highlighted {
+      @apply bg-gradient-to-r from-amber-300/10 to-amber-300/5;
+    }
 
-  .line {
-    @apply block min-h-4 hover:bg-amber-500/10 -mx-6 px-6;
+    .highlighted-word {
+      @apply bg-amber-300/10 rounded hover:bg-amber-300/30 transition-all;
+      @apply inline-block;
+    }
+
+    .line {
+      @apply block min-h-4 hover:bg-amber-500/10 -mx-6 px-6;
+    }
   }
 }
 
