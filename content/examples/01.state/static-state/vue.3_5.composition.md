@@ -1,5 +1,4 @@
-```vue
-// [!code word:year]
+```vue /year/
 <script setup lang="ts">
 const year = new Date().getFullYear(); // [!code highlight]
 </script>

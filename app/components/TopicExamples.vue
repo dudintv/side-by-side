@@ -12,8 +12,9 @@ const values = computed(() => {
     props.examples?.[props.topic]?.['vue.3_5.composition']?.body || null,
   ];
 });
+const hasValues = computed(() => values.value.every(Boolean));
 </script>
 
 <template>
-  <ComparingExamples :values />
+  <ComparingExamples v-if="hasValues" :values />
 </template>

@@ -14,20 +14,17 @@ const toc = computed<TocItem[]>(() => {
     return [];
   }
 
-  const flattenToc = (items: TocLink[], level = 2): TocItem[] => {
+  const flattenToc = (items: TocLink[], level = 1): TocItem[] => {
     const result: TocItem[] = [];
 
     for (const item of items) {
-      if (item.id && item.text) {
+      // Only include H2 tags (level 1 in the TOC hierarchy)
+      if (item.id && item.text && item.depth === 2) {
         result.push({
           id: item.id,
           text: item.text,
           level,
         });
-      }
-
-      if (item.children?.length) {
-        result.push(...flattenToc(item.children, level + 1));
       }
     }
 
@@ -67,7 +64,7 @@ onMounted(() => {
         }
       }
     },
-    { rootMargin: '-12% 0px -65% 0px' }
+    { rootMargin: '-12% 0px -20% 0px' }
   );
 
   toc.value.forEach(({ id }) => {

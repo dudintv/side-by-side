@@ -6,7 +6,7 @@ const { currentFrameworks, currentFrameworksAmount, frameworks } = useSettings()
 </script>
 
 <template>
-  <div class="mb-12">
+  <div class="mt-6 mb-12 comparing">
     <div
       class="example-root grid gap-4 md:gap-8 ml:gap-12 w-full"
       :style="`grid-template-columns: repeat(${currentFrameworksAmount}, 1fr);`"

@@ -7,10 +7,11 @@ body {
 
 @theme {
   --ui-primary: var(--color-sky-950);
+  --ui-text: var(--ui-color-neutral-800);
 }
-
 .dark {
   --ui-primary: var(--color-sky-200);
+  --ui-text: var(--ui-color-neutral-300);
 }
 
 h1,
@@ -23,20 +24,24 @@ h6 {
 }
 
 h1 {
-  @apply font-bold text-4xl mb-8;
+  @apply font-bold text-4xl my-8;
 }
 h2 {
-  @apply font-semibold text-3xl mb-4;
+  @apply font-semibold text-3xl my-6;
 }
 h3 {
-  @apply font-semibold text-2xl mb-2;
+  @apply font-semibold text-2xl my-2;
 }
 h4 {
   @apply font-semibold text-xl mt-8 mb-2 opacity-90 dark:opacity-70;
 }
 
 p {
-  @apply leading-7;
+  @apply leading-7 mb-6 max-w-5xl;
+
+  strong {
+    @apply font-bold text-black dark:text-white;
+  }
 }
 
 /* SHIKI CODE HIGHLIGHTING */
@@ -45,12 +50,14 @@ p {
   @apply px-6 py-4 rounded-2xl;
 }
 html.dark .shiki {
-  color: var(--shiki-dark) !important;
   background-color: var(--shiki-dark-bg) !important;
-  /* Optional, if you also want font styles */
   font-style: var(--shiki-dark-font-style) !important;
   font-weight: var(--shiki-dark-font-weight) !important;
   text-decoration: var(--shiki-dark-text-decoration) !important;
+}
+
+html.dark .shiki span {
+  color: var(--shiki-dark) !important;
 }
 
 @keyframes shake {
@@ -70,9 +77,23 @@ html.dark .shiki {
   animation: 0.3s ease-in-out shake;
 }
 
+.comparing p {
+  @apply px-6 max-w-xl;
+}
+
+p a {
+  @apply bg-accented/20 hover:bg-accented/80 px-0.5 py-1 border-b border-dashed border-b-inverted/40 hover:border-b-inverted/80 transition-all;
+}
+
+code {
+  @apply bg-elevated p-1 rounded;
+}
+
 pre code {
+  @apply p-0;
+
   .highlighted {
-    @apply bg-amber-300/15;
+    @apply bg-gradient-to-r from-amber-300/10 to-amber-300/5;
   }
 
   .highlighted-word {
@@ -81,15 +102,7 @@ pre code {
   }
 
   .line {
-    @apply block min-h-4 hover:bg-amber-500/10  -mx-6 px-6;
-  }
-}
-
-html.dark {
-  pre code {
-    .highlighted {
-      @apply bg-amber-300/5;
-    }
+    @apply block min-h-4 hover:bg-amber-500/10 -mx-6 px-6;
   }
 }
 

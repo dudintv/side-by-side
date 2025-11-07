@@ -23,7 +23,7 @@ const navigationItems = computed<NavigationMenuItem[]>(() => {
 
 <template>
   <div
-    class="px-0 sm:px-2 md:px-4 lg:px-6 xl:px-8 py-8 flex gap-4 md:gap-8 lg:gap-12 scroll-auto"
+    class="px-0 sm:px-2 md:px-4 lg:px-6 xl:px-8 mb-24 flex gap-4 md:gap-8 lg:gap-12 scroll-auto"
     :class="{ 'numbered-lines': hasLineNumbers }"
   >
     <div class="hidden md:block">

@@ -1,0 +1,1 @@
+Vue uses a [Proxy](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Proxy)-based reactivity system that automatically detects when you access or modify data. When you declare state with `ref()`, Vue wraps your data in a Proxy that intercepts reads and writes.

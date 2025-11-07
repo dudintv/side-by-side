@@ -1,9 +1,10 @@
 <script setup lang="ts">
 import { createHighlighter } from 'shiki';
 import {
+  transformerMetaHighlight,
   transformerMetaWordHighlight,
   transformerNotationHighlight,
-  transformerNotationWordHighlight,
+  // transformerNotationWordHighlight,
   transformerRemoveLineBreak,
   transformerNotationErrorLevel,
   transformerRenderIndentGuides,
@@ -25,24 +26,28 @@ const highlighter = await createHighlighter({
   langs: ['javascript', 'typescript', 'jsx', 'vue'],
 });
 
-const htmlCode = computed(() =>
-  highlighter.codeToHtml((attrs.code as string).trim(), {
+const htmlCode = computed(() => {
+  const code = (attrs.code as string).trim();
+
+  return highlighter.codeToHtml(code, {
     lang: attrs.language as string,
+    meta: attrs.meta ? { __raw: attrs.meta as string } : undefined,
     themes: {
       light: 'vitesse-light',
       dark: 'vitesse-dark',
     },
     transformers: [
+      transformerMetaHighlight(),
       transformerMetaWordHighlight(),
       transformerNotationHighlight(),
-      transformerNotationWordHighlight(),
-      transformerRemoveLineBreak(),
       transformerNotationErrorLevel(),
-      transformerRenderIndentGuides(),
       transformerNotationFocus(),
+      // transformerNotationWordHighlight(),
+      transformerRenderIndentGuides(),
+      transformerRemoveLineBreak(),
     ],
-  })
-);
+  });
+});
 
 const codeContainer = useTemplateRef('codeContainer');
 

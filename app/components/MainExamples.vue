@@ -12,6 +12,8 @@ const items = computed(() =>
   }))
 );
 const activeItem = ref(examplesNames.value[0]);
+const hasMultipleExamples = computed(() => items.value?.length > 1);
+
 const values = computed(() =>
   activeItem.value
     ? [
@@ -24,7 +26,7 @@ const values = computed(() =>
 
 <template>
   <div class="mb-12">
-    <div class="flex gap-4 md:gap-6 lg:gap-8 pt-8 pb-4">
+    <div v-if="hasMultipleExamples" class="flex gap-4 md:gap-6 lg:gap-8 pt-8 pb-4">
       <h3>Examples</h3>
       <UTabs v-model="activeItem" :items variant="link" />
     </div>

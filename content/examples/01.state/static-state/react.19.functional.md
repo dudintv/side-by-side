@@ -1,6 +1,5 @@
-```jsx /const/
-// [!code word:year]
-const year = new Date().getFullYear(); // [!code focus] [!code highlight]
+```jsx /year/
+const year = new Date().getFullYear(); // [!code highlight]
 
 export default function () {
   return <div>{year}</div>;
