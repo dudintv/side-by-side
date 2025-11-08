@@ -1,15 +1,16 @@
-### Required
+- **Optional** — by default
+- **Required** — add “isRequired” to the field in “propTypes”
 
-Add “isRequired” to the field in “propTypes”.
-
-### Optional
-
-By default.
-
-```js
-MyReactComponent.propTypes = {
-  start: PropTypes.number.isRequired,
-  disabled: PropTypes.boolean,
-  description: PropTypes.string,
-};
+```js /?:/
+export default function MyComponent({
+  start,
+  disabled = false,
+  description,
+}: {
+  start: number;
+  disabled?: boolean;
+  description?: string | null;
+}) {
+  return (...)
+}
 ```

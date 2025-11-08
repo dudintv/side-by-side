@@ -64,7 +64,7 @@ onMounted(() => {
         }
       }
     },
-    { rootMargin: '-12% 0px -20% 0px' }
+    { rootMargin: '-12% 0px -40% 0px' }
   );
 
   toc.value.forEach(({ id }) => {

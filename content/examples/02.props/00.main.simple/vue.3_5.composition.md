@@ -1,26 +1,26 @@
-```vue
-<script setup>
+```vue /title/ /isPublished/ /publishedAt/
+<script setup lang="ts">
 import { defineProps } from 'vue';
 
-const props = defineProps({
-  name: {
-    type: String,
-    required: true,
-  },
-  mark: {
-    type: String,
-    default: '!',
-  },
-});
+const { title, publishedAt, isPublished } = defineProps<{
+  title: string;
+  isPublished?: boolean;
+  publishedAt?: Date;
+}>();
 </script>
 
 <template>
-  <h1>Hello {{ props.name }}{{ props.mark }}</h1>
+  <h1>{{ title }}{{ !isPublished && '(draft)' }}</h1>
+  <span v-if="publishedAt">{{ publishedAt }}</span>
 </template>
 ```
 
 #### Using
 
-```html
-<MyComponent name="world" />
+```jsx /title/ /isPublished/ /publishedAt/
+<ArticleCard
+  title="Vue"
+  :publishedAt="new Date()"
+  isPublished
+/>
 ```

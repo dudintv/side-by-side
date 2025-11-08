@@ -16,14 +16,9 @@ defineOptions({
 });
 
 const attrs = useAttrs();
-// const attrsWithoutCode = computed(() => {
-//   const withoutCode = { ...attrs };
-//   void (withoutCode.code && delete withoutCode.code);
-//   return withoutCode;
-// });
 const highlighter = await createHighlighter({
   themes: ['vitesse-dark', 'vitesse-light'],
-  langs: ['javascript', 'typescript', 'jsx', 'vue'],
+  langs: ['javascript', 'typescript', 'jsx', 'tsx', 'vue', 'xml', 'html'],
 });
 
 const htmlCode = computed(() => {

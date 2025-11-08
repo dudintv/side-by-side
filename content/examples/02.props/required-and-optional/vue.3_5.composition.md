@@ -1,31 +1,16 @@
-### Required
+- **Optional** — by default OR “required: false”
+- **Required** — add “required: true” as a prop property
 
-Add “required: true” as a prop property.
-
-### Optional
-
-By default OR “required: false”.
-
-```js
-const props = defineProps({
-  start: {
-    type: Number,
-    required: true,
-  },
-  disabled: {
-    type: Boolean,
-  },
-  description: {
-    type: [String, null],
-    required: false,
-  },
-});
-```
-
-```ts
-const props = defineProps<{
+```ts /?:/
+const {
+  start,
+  disabled = false,
+  description,
+} = defineProps<{
   start: number;
   disabled?: boolean;
   description?: string | null;
 }>();
 ```
+
+The `Boolean` absent props will be cast to `false`.

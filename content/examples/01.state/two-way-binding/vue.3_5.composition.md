@@ -26,7 +26,7 @@ There is possible to have [multiple `v-model`s](https://vuejs.org/guide/componen
 ```
 
 ```vue
-<script setup>
+<script setup lang="ts">
 const firstName = defineModel('firstName');
 const lastName = defineModel('lastName');
 </script>
