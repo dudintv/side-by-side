@@ -8,28 +8,30 @@ const props = defineProps<{
 const examplesNames = computed(() => Object.keys(props.examples));
 const items = computed(() =>
   examplesNames.value.map((key) => ({
-    label: key,
+    label: `${key[0]!.toUpperCase()}${key.slice(1)}`,
+    value: key.toLowerCase(),
+    slot: key.toLowerCase(),
   }))
 );
 const activeItem = ref(examplesNames.value[0]);
 const hasMultipleExamples = computed(() => items.value?.length > 1);
 
-const values = computed(() =>
+const values = (itemName: string) =>
   activeItem.value
     ? [
-        props.examples?.[activeItem.value]?.['react.19.functional']?.body || null,
-        props.examples?.[activeItem.value]?.['vue.3_5.composition']?.body || null,
+        props.examples?.[itemName]?.['react.19.functional']?.body || null,
+        props.examples?.[itemName]?.['vue.3_5.composition']?.body || null,
       ]
-    : []
-);
+    : [];
 </script>
 
 <template>
   <div class="mb-12">
-    <div v-if="hasMultipleExamples" class="flex gap-4 md:gap-6 lg:gap-8 pt-8 pb-4">
-      <h3>Examples</h3>
-      <UTabs v-model="activeItem" :items variant="link" />
-    </div>
-    <ComparingExamples :values />
+    <UTabs v-if="hasMultipleExamples" v-model="activeItem" :items variant="link">
+      <template v-for="exampleItem of items" :key="exampleItem.value" #[exampleItem.value]="{ item }">
+        <ComparingExamples :values="values(item.value)" />
+      </template>
+    </UTabs>
+    <ComparingExamples v-else-if="items[0]?.value" :values="values(items[0]?.value)" />
   </div>
 </template>
