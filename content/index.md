@@ -1,3 +1,7 @@
+> ### Work In Progress.
+>
+> I'm still actively working on good practical examples.
+
 # Side-by-Side Framework Comparison
 
 It helps you to compare code examples across different frontend frameworks (Vue, React) in a side-by-side format.

@@ -10,7 +10,7 @@ const { title, publishedAt, isPublished } = defineProps<{
 </script>
 
 <template>
-  <h1>{{ title }}{{ !isPublished && '(draft)' }}</h1>
+  <h1>{{ title }}{{ !isPublished && ' (draft)' }}</h1>
   <span v-if="publishedAt">{{ publishedAt }}</span>
 </template>
 ```

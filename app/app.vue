@@ -14,12 +14,15 @@
 
     <UFooter>
       <template #left>
-        <p class="text-sm text-muted">Dmitry Dudin, Frontend Engineer</p>
+        <UButton to="https://www.linkedin.com/in/dudintv/" target="_blank" color="neutral" variant="ghost">
+          <!-- class="text-sm text-muted hover:text-primary" -->
+          Dmitry Dudin, Frontend Engineer
+        </UButton>
       </template>
 
       <template #right>
         <UButton
-          to="https://github.com/dudintv"
+          to="https://github.com/dudintv/side-by-side"
           target="_blank"
           icon="i-simple-icons-github"
           aria-label="GitHub"

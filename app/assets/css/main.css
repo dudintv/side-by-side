@@ -44,6 +44,10 @@ p {
   }
 }
 
+blockquote {
+  @apply my-8;
+}
+
 /* SHIKI CODE HIGHLIGHTING */
 
 .shiki {
