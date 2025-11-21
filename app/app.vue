@@ -4,7 +4,7 @@
   <UApp>
     <TheHeader />
 
-    <UMain>
+    <UMain class="pt-24">
       <NuxtLayout>
         <NuxtPage />
       </NuxtLayout>
