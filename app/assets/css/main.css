@@ -8,6 +8,7 @@ body {
 @theme {
   --ui-primary: var(--color-sky-950);
   --ui-text: var(--ui-color-neutral-800);
+  --text-tiny: 0.625rem;
 }
 .dark {
   --ui-primary: var(--color-sky-200);
