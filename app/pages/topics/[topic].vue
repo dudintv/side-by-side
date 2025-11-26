@@ -8,14 +8,9 @@ const route = useRoute();
 const { data: page } = await useAsyncData(`topic-${route.params.topic}`, () =>
   queryCollection('topics').path(`/topics/${route.params.topic}`).first()
 );
-const { data: examples } = await useAsyncData(
-  `examples-${route.params.topic}`,
-  () => {
-    return queryCollection('examples')
-      .where('path', 'LIKE', `/examples/${route.params.topic}/%`)
-      .all();
-  }
-);
+const { data: examples } = await useAsyncData(`examples-${route.params.topic}`, () => {
+  return queryCollection('examples').where('path', 'LIKE', `/examples/${route.params.topic}/%`).all();
+});
 
 // const experiment = computed(() => {
 //   if (!examples.value) {
@@ -43,9 +38,7 @@ const examplesData = computed<{
   const mainExamples = examples.value
     .filter((doc) => doc.path.match(/main/))
     .reduce((structuredExamples, doc) => {
-      const [_, variantName, flavors] = doc.path.match(
-        /main\.?([^/]*)\/(.*)/
-      ) as [string, string, string];
+      const [_, variantName, flavors] = doc.path.match(/main\.?([^/]*)\/(.*)/) as [string, string, string];
       structuredExamples[variantName] ??= {};
       structuredExamples[variantName][flavors] = doc;
       return structuredExamples;
@@ -54,9 +47,11 @@ const examplesData = computed<{
   const otherExamples = examples.value
     .filter((doc) => !doc.path.match(/main/))
     .reduce((structuredExamples, doc) => {
-      const [_, variantName, flavors] = doc.path.match(
-        `${route.params.topic}\\/([^/]*)\\/([^/]*)`
-      ) as [string, string, string];
+      const [_, variantName, flavors] = doc.path.match(`${route.params.topic}\\/([^/]*)\\/([^/]*)`) as [
+        string,
+        string,
+        string,
+      ];
       structuredExamples[variantName] ??= {};
       structuredExamples[variantName][flavors] = doc;
       return structuredExamples;
@@ -81,8 +76,8 @@ definePageMeta({
 </script>
 
 <template>
-  <div class="w-full">
-    <ContentRenderer v-if="page" :value="page" :data="examplesData" />
+  <div class="overflow-x-auto">
+    <ContentRenderer v-if="page" :value="page" :data="examplesData" class="w-full" />
 
     <Teleport to="#toc-teleport">
       <TopicTOC v-if="page" :page="page" />

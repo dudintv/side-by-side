@@ -26,12 +26,16 @@ const values = (itemName: string) =>
 </script>
 
 <template>
-  <div class="mb-12">
-    <UTabs v-if="hasMultipleExamples" v-model="activeItem" :items variant="link">
-      <template v-for="exampleItem of items" :key="exampleItem.value" #[exampleItem.value]="{ item }">
-        <ComparingExamples :values="values(item.value)" />
-      </template>
-    </UTabs>
-    <ComparingExamples v-else-if="items[0]?.value" :values="values(items[0]?.value)" />
-  </div>
+  <Suspense>
+    <div class="mb-12">
+      <UTabs v-if="hasMultipleExamples" v-model="activeItem" :items variant="link">
+        <template v-for="exampleItem of items" :key="exampleItem.value" #[exampleItem.value]="{ item }">
+          <ComparingExamples :values="values(item.value)" />
+        </template>
+      </UTabs>
+      <ComparingExamples v-else-if="items[0]?.value" :values="values(items[0]?.value)" />
+    </div>
+
+    <template #fallback><USkeleton class="h-[200px] w-auto" /></template>
+  </Suspense>
 </template>

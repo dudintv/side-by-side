@@ -16,5 +16,9 @@ const hasValues = computed(() => values.value.every(Boolean));
 </script>
 
 <template>
-  <ComparingExamples v-if="hasValues" :values />
+  <Suspense>
+    <ComparingExamples v-if="hasValues" :values />
+
+    <template #fallback><USkeleton class="h-[200px] w-auto" /></template>
+  </Suspense>
 </template>
