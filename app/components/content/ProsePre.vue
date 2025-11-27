@@ -1,47 +1,28 @@
 <script setup lang="ts">
-import { createHighlighter } from 'shiki';
-import {
-  transformerMetaHighlight,
-  transformerMetaWordHighlight,
-  transformerNotationHighlight,
-  // transformerNotationWordHighlight,
-  transformerRemoveLineBreak,
-  transformerNotationErrorLevel,
-  transformerRenderIndentGuides,
-  transformerNotationFocus,
-} from '@shikijs/transformers';
+import { highlightCode } from '~/composables/useShiki';
 
 defineOptions({
   inheritAttrs: false,
 });
 
 const attrs = useAttrs();
-const highlighter = await createHighlighter({
-  themes: ['vitesse-dark', 'vitesse-light'],
-  langs: ['javascript', 'typescript', 'jsx', 'tsx', 'vue', 'xml', 'html'],
-});
 
-const htmlCode = computed(() => {
-  const code = (attrs.code as string).trim();
+// Use singleton Shiki instance for highlighting
+const htmlCode = ref('');
+const isHighlighting = ref(true);
 
-  return highlighter.codeToHtml(code, {
-    lang: attrs.language as string,
-    meta: attrs.meta ? { __raw: attrs.meta as string } : undefined,
-    themes: {
-      light: 'vitesse-light',
-      dark: 'vitesse-dark',
-    },
-    transformers: [
-      transformerMetaHighlight(),
-      transformerMetaWordHighlight(),
-      transformerNotationHighlight(),
-      transformerNotationErrorLevel(),
-      transformerNotationFocus(),
-      // transformerNotationWordHighlight(),
-      transformerRenderIndentGuides(),
-      transformerRemoveLineBreak(),
-    ],
-  });
+onMounted(async () => {
+  try {
+    const code = (attrs.code as string) || '';
+    const language = (attrs.language as string) || 'text';
+    const meta = attrs.meta as string | undefined;
+
+    htmlCode.value = await highlightCode(code, language, meta);
+    isHighlighting.value = false;
+  } catch (error) {
+    console.error('Error highlighting code:', error);
+    isHighlighting.value = false;
+  }
 });
 
 const codeContainer = useTemplateRef('codeContainer');
@@ -93,12 +74,9 @@ onMounted(() => {
 
 <template>
   <div ref="codeContainer">
-    <!-- <pre class="text-primary/50">{{ attrsWithoutCode }}</pre>
-    <pre
-      :class="attrs.class as string"
-      class="py-8 text-sm text-primary/30"
-      :style="attrs.style as string"
-    ><slot /></pre> -->
-    <div v-html="htmlCode" />
+    <!-- Show loading state while highlighting (only on first render) -->
+    <div v-if="isHighlighting" class="animate-pulse bg-gray-200 dark:bg-gray-700 rounded h-32" />
+    <!-- Show highlighted code once ready -->
+    <div v-else v-html="htmlCode" />
   </div>
 </template>

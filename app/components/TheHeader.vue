@@ -34,7 +34,7 @@ onMounted(() => {
       <div class="flex items-center">
         <NuxtLink
           to="/"
-          class="shrink-0 uppercase font-bold mr-0 sm:mr-4 md:mr-10 lg:mr-16 text-primary flex gap-1 max-md:flex-col transition-all"
+          class="shrink-0 uppercase font-bold mr-1 xs:mr-2 sm:mr-4 md:mr-10 lg:mr-16 text-primary flex gap-1 max-md:flex-col transition-all"
           :class="[isScrolled ? 'leading-2 text-sm' : 'leading-3 md:text-lg text-base']"
         >
           <span>Side</span>
@@ -45,8 +45,8 @@ onMounted(() => {
     </template>
 
     <div class="flex items-center gap-4 sm:gap-6 md:gap-8 lg:gap-12 flex-1 w-full">
-      <FrameworkSelector :name="currentFrameworks[0]!" :isSmall="isScrolled" />
-      <FrameworkSelector :name="currentFrameworks[1]!" :isSmall="isScrolled" />
+      <FrameworkSelector :name="currentFrameworks[0]!" :is-small="isScrolled" />
+      <FrameworkSelector :name="currentFrameworks[1]!" :is-small="isScrolled" />
     </div>
 
     <template #right>
