@@ -115,19 +115,26 @@ onMounted(() => {
           color="neutral"
           variant="soft"
           aria-label="On this page"
-          class="px-4 py-3 my-2 mx-2 backdrop-blur-sm bg-elevated/50 rounded-2xl border border-accented/20"
+          class="px-4 py-3 backdrop-blur-sm bg-elevated/50 rounded-2xl border border-accented/20"
         >
           <span class="text-sm text-muted mr-2 hidden sm:block">on the page</span>
         </UButton>
 
-        <template #content>
+        <template #content="{ close }">
           <div class="p-2 min-w-[200px] max-w-[280px]">
-            <div class="text-xs font-semibold text-gray-600 dark:text-gray-400 px-2 pb-2">On this page</div>
+            <div class="sm:hidden text-xs text-right font-semibold text-gray-600 dark:text-gray-400 px-2 pb-2">
+              on this page
+            </div>
             <nav class="flex flex-col gap-1">
               <button
                 v-for="item in toc"
                 :key="item.id"
-                @click="scrollToSection(item.id)"
+                @click="
+                  () => {
+                    scrollToSection(item.id);
+                    close();
+                  }
+                "
                 class="block w-full text-left text-sm transition-all duration-200 px-3 py-2 rounded cursor-pointer"
                 :class="activeId === item.id ? 'font-medium bg-elevated' : 'hover:bg-elevated/50'"
               >

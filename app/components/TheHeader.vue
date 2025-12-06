@@ -41,25 +41,22 @@ const currentPageTitle = computed(() => {
     <header
       :class="[isScrolled ? 'h-12' : 'h-24']"
       class="the-header transition-all duration-300 ease-in-out flex justify-between px-2 sm:px-3 md:px-4 lg:px-6 xl:px-8 backdrop-blur-sm"
-      :toggle="false"
     >
-      <div class="flex">
-        <div class="flex items-center">
-          <NuxtLink
-            to="/"
-            class="shrink-0 uppercase font-bold mr-1 xs:mr-4 sm:mr-6 md:mr-10 lg:mr-16 text-primary flex gap-1 max-md:flex-col transition-all"
-            :class="[isScrolled ? 'leading-2 text-sm' : 'leading-3 md:text-lg text-base']"
-          >
-            <span>Side</span>
-            <span>by</span>
-            <span>side</span>
-          </NuxtLink>
-        </div>
+      <div class="flex items-center">
+        <NuxtLink
+          to="/"
+          class="shrink-0 uppercase font-bold text-primary flex gap-1 max-md:flex-col transition-all"
+          :class="[isScrolled ? 'leading-2 text-sm' : 'leading-3 md:text-lg text-base']"
+        >
+          <span>Side</span>
+          <span>by</span>
+          <span>side</span>
+        </NuxtLink>
+      </div>
 
-        <div class="flex items-center gap-4 sm:gap-6 md:gap-8 lg:gap-12 flex-1 w-full">
-          <FrameworkSelector :name="currentFrameworks[0]!" :is-small="isScrolled" />
-          <FrameworkSelector :name="currentFrameworks[1]!" :is-small="isScrolled" />
-        </div>
+      <div class="flex items-center gap-4 sm:gap-6 md:gap-8 lg:gap-12">
+        <FrameworkSelector :name="currentFrameworks[0]!" :is-small="isScrolled" />
+        <FrameworkSelector :name="currentFrameworks[1]!" :is-small="isScrolled" />
       </div>
 
       <div class="flex items-center gap-2 lg:gap-4 max-sm:gap-0">
