@@ -109,9 +109,16 @@ onMounted(() => {
 
     <!-- Mobile TOC dropdown in LocalNav -->
     <Teleport to="#local-nav-toc">
-      <span class="text-sm text-muted mr-2 hidden sm:block">On the page:</span>
       <UPopover :content="{ side: 'bottom', align: 'end' }">
-        <UButton icon="i-lucide-list" color="neutral" variant="subtle" aria-label="On this page" />
+        <UButton
+          icon="i-lucide-list"
+          color="neutral"
+          variant="soft"
+          aria-label="On this page"
+          class="px-4 py-3 my-2 mx-2 backdrop-blur-sm bg-elevated/50 rounded-2xl border border-accented/20"
+        >
+          <span class="text-sm text-muted mr-2 hidden sm:block">on the page</span>
+        </UButton>
 
         <template #content>
           <div class="p-2 min-w-[200px] max-w-[280px]">
