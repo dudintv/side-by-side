@@ -15,9 +15,8 @@ const isHovered = ref(false);
 <template>
   <div class="flex items-center justify-between m-2 md:m-4 lg:m-6">
     <div class="flex gap-2">
-      <UTooltip :text="`Previous topic: ${previous.label}`">
+      <UTooltip v-if="previous" :text="`Previous topic: ${previous.label}`">
         <UButton
-          v-if="previous"
           :to="previous.to"
           icon="i-lucide-chevron-left"
           color="neutral"
@@ -45,9 +44,8 @@ const isHovered = ref(false);
           </div>
         </template>
       </UPopover>
-      <UTooltip :text="`Next topic: ${next.label}`">
+      <UTooltip v-if="next" :text="`Next topic: ${next.label}`">
         <UButton
-          v-if="next"
           :to="next.to"
           icon="i-lucide-chevron-right"
           color="neutral"
