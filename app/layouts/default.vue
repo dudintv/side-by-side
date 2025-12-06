@@ -22,27 +22,21 @@ const navigationItems = computed<NavigationMenuItem[]>(() => {
 </script>
 
 <template>
-  <div
-    class="px-0 sm:px-2 md:px-4 lg:px-6 xl:px-8 mb-24 flex gap-4 md:gap-8 lg:gap-12 w-full"
-    :class="{ 'numbered-lines': hasLineNumbers }"
-  >
-    <div class="hidden md:block">
-      <div class="shrink-0 sticky top-32">
-        <UNavigationMenu :items="navigationItems" orientation="vertical" />
-        <div id="toc-teleport" />
-      </div>
-    </div>
+  <div>
+    <TheHeader :items="navigationItems" />
 
-    <div class="md:hidden">
-      <UPopover :content="{ side: 'right', align: 'start' }" class="sticky top-32">
-        <UButton icon="i-lucide-menu" color="neutral" variant="subtle" />
-
-        <template #content>
+    <div
+      class="px-2 sm:px-3 md:px-4 lg:px-6 xl:px-8 mb-24 flex gap-4 md:gap-8 lg:gap-12 w-full"
+      :class="{ 'numbered-lines': hasLineNumbers }"
+    >
+      <div class="hidden xl:block">
+        <div class="shrink-0 sticky top-32">
           <UNavigationMenu :items="navigationItems" orientation="vertical" />
-        </template>
-      </UPopover>
-    </div>
+          <div id="toc-teleport" />
+        </div>
+      </div>
 
-    <slot />
+      <slot />
+    </div>
   </div>
 </template>

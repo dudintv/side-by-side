@@ -2,9 +2,7 @@
 
 <template>
   <UApp>
-    <TheHeader />
-
-    <UMain class="pt-24">
+    <UMain>
       <NuxtLayout>
         <NuxtPage />
       </NuxtLayout>

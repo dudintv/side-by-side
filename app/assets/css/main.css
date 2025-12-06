@@ -22,7 +22,19 @@ h3,
 h4,
 h5,
 h6 {
-  @apply scroll-mt-32;
+  @apply scroll-mt-32 md:scroll-mt-32;
+}
+
+/* Mobile: account for header (h-24) + LocalNav (h-12) = 36 * 4 = 144px */
+@media (max-width: 768px) {
+  h1,
+  h2,
+  h3,
+  h4,
+  h5,
+  h6 {
+    scroll-margin-top: 9rem;
+  }
 }
 
 h1 {
